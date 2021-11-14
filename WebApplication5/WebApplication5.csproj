@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Builder"></Using>
+		<Using Include="Microsoft.AspNetCore.Hosting"></Using>
+		<Using Include="Microsoft.AspNetCore.Http"></Using>
+		<Using Include="Microsoft.Extensions.Configuration"></Using>
+		<Using Include="Microsoft.Extensions.DependencyInjection"></Using>
+		<Using Include="Microsoft.Extensions.Hosting"></Using>
+		<Using Include="Middlewares.Middleware"></Using>
+	</ItemGroup>
+</Project>
