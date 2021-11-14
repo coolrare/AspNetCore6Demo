@@ -1,7 +1,12 @@
+using AspNetCore6Demo.Models;
+using DAO;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHealthChecks();
 
 //builder.Services.AddSingleton<SmtpSettings>();
 
@@ -12,6 +17,13 @@ builder.Services.AddSingleton<SmtpSettings>(sp => {
     var smtpSettings = new SmtpSettings() { Host = "localhost" };
     return smtpSettings;
 });
+
+builder.Services.AddSingleton<MySettings>(sp => {
+    var mySettings = new MySettings() { Host = "8.8.8.8" };
+    return mySettings;
+});
+
+builder.Services.AddTransient<MyService>();
 
 
 builder.Logging.ClearProviders();
@@ -36,6 +48,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapHealthChecks("/health");
 
 app.MapControllerRoute(
     name: "default",

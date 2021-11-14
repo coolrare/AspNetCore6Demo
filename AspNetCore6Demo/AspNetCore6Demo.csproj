@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\DAO\DAO.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Using Include="AspNetCore6Demo.Models" />
 	</ItemGroup>
 	

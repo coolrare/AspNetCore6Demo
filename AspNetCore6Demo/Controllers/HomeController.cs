@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DAO;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace AspNetCore6Demo.Controllers
@@ -6,13 +7,13 @@ namespace AspNetCore6Demo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly SmtpSettings smtpSettings;
+        private readonly SmtpSettings _smtpSettings;
 
         public HomeController(ILogger<HomeController> logger,
             SmtpSettings smtpSettings)
         {
             _logger = logger;
-            this.smtpSettings = smtpSettings;
+            _smtpSettings = smtpSettings;
         }
 
         public IActionResult Index()
@@ -20,9 +21,10 @@ namespace AspNetCore6Demo.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy([FromServices] MyService myService)
         {
-            ViewBag.SmtpHost = smtpSettings.Host;
+            ViewBag.SmtpHost = myService.Run();
+            //ViewBag.SmtpHost = smtpSettings.Host;
             return View();
         }
 
