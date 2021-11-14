@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalAsp6", "MinimalAsp6\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{C92D0538-1C1D-414D-906A-13EC0A009EB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi6", "WebApi6\WebApi6.csproj", "{81141491-9EBD-4961-A173-0788266E467F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C92D0538-1C1D-414D-906A-13EC0A009EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C92D0538-1C1D-414D-906A-13EC0A009EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C92D0538-1C1D-414D-906A-13EC0A009EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81141491-9EBD-4961-A173-0788266E467F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81141491-9EBD-4961-A173-0788266E467F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81141491-9EBD-4961-A173-0788266E467F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81141491-9EBD-4961-A173-0788266E467F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
