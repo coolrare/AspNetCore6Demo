@@ -50,12 +50,13 @@ public class Startup
 
         // app.UseMiddleware<HelloWorldMiddleware>();
 
-        app.UseHelloWorld();
+        // app.UseHelloWorld();
 
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello");
-        });
+
+        // app.Run(async (context) =>
+        // {
+        //     await context.Response.WriteAsync("Hello");
+        // });
 
     }
 }
