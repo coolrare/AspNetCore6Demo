@@ -19,6 +19,7 @@ namespace WebApi6.Models
         public int? InstructorId { get; set; }
         public byte[] RowVersion { get; set; }
 
+        [JsonIgnore]
         public virtual Person Instructor { get; set; }
         public virtual ICollection<Course> Course { get; set; }
     }
