@@ -30,7 +30,8 @@ namespace WebApi6.Controllers
         [HttpGet("{id}")]
         public ActionResult<Department?> GetDepartmentById(int id)
         {
-            return _context.Department.Find(id);
+            return _context.Department.Include(p => p.Course).FirstOrDefault(p => p.DepartmentId == id);
+            // return _context.Department.Find(id);
             // return context.Department.FirstOrDefault(p => p.DepartmentId == id);
             // return context.Department.Where(p => p.DepartmentId == id).FirstOrDefault();
         }
@@ -53,8 +54,10 @@ namespace WebApi6.Controllers
             {
                 return NotFound();
             }
+            // ValueInjector
             item.Budget = model.Budget;
             item.Name = model.Name;
+
             // _context.Department.Update(model);
             _context.SaveChanges();
 
