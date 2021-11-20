@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApi6.Models;
 
 namespace WebApi6.Controllers
@@ -23,7 +24,7 @@ namespace WebApi6.Controllers
         [HttpGet("")]
         public ActionResult<IEnumerable<Department>> GetDepartments()
         {
-            return _context.Department;
+            return Ok(_context.Department.AsNoTracking());
         }
 
         [HttpGet("{id}")]
