@@ -28,7 +28,7 @@ namespace WebApi6.Controllers
             return Ok(_context.Department.AsNoTracking());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = nameof(GetDepartmentById))]
         public ActionResult<Department?> GetDepartmentById(int id)
         {
             return _context.Department.Include(p => p.Course).FirstOrDefault(p => p.DepartmentId == id);
@@ -38,13 +38,16 @@ namespace WebApi6.Controllers
         }
 
         [HttpPost("")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesDefaultResponseType]
         public ActionResult<Department> PostDepartment(Department model)
         {
             // model.Course.Add(new Course() {});
             _context.Department.Add(model);
             _context.SaveChanges();
 
-            return model;
+            return CreatedAtAction(nameof(GetDepartmentById), 
+                new { id = model.DepartmentId }, model);
         }
 
         [HttpPut("{id}")]
