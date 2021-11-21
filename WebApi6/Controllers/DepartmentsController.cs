@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi6.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApi6.Controllers
 {
@@ -47,6 +48,9 @@ namespace WebApi6.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public ActionResult<Department> PutDepartment(int id, Department model)
         {
             var item = _context.Department.Find(id);
@@ -65,6 +69,9 @@ namespace WebApi6.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public ActionResult<Department> DeleteDepartmentById(int id)
         {
             var item = _context.Department.Find(id);
