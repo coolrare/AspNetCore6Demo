@@ -22,6 +22,13 @@ namespace WebApi6.Controllers
             this._context = context;
         }
 
+        [HttpGet("string")]
+        [Produces("text/json")]
+        public string GetString()
+        {
+            return "Hello World";
+        }
+
         [HttpGet("")]
         public ActionResult<IEnumerable<Department>> GetDepartments()
         {
