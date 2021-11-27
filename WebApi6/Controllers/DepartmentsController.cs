@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,27 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi6.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace WebApi6.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
         private readonly ILogger<DepartmentsController> _logger;
         private readonly ContosouniversityContext _context;
+        private readonly SmtpSettings _smtpSettings;
 
-        public DepartmentsController(ILogger<DepartmentsController> logger, ContosouniversityContext context)
+        public DepartmentsController(ILogger<DepartmentsController> logger,
+            ContosouniversityContext context,
+            IOptions<SmtpSettings> smtpSettings)
         {
             this._logger = logger;
-            this._context = context;
+            _context = context;
+            _smtpSettings = smtpSettings.Value;
         }
 
         [HttpGet("string")]
         [Produces("text/json")]
         public string GetString()
         {
-            return "Hello World";
+            return "Host: " + _smtpSettings.Host;
         }
 
         [HttpGet("")]
@@ -53,7 +60,7 @@ namespace WebApi6.Controllers
             _context.Department.Add(model);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetDepartmentById), 
+            return CreatedAtAction(nameof(GetDepartmentById),
                 new { id = model.DepartmentId }, model);
         }
 
@@ -82,6 +89,7 @@ namespace WebApi6.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Roles = "Admin")]
         public ActionResult<Department> DeleteDepartmentById(int id)
         {
             var item = _context.Department.Find(id);
