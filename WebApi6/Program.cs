@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)
+            .WriteTo.Seq("http://localhost:5341")
             .CreateLogger();
 
 try
@@ -85,7 +86,8 @@ try
     //    app.UseDeveloperExceptionPage();
     //}
 
-    if (app.Environment.IsDevelopment())
+
+    if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
     {
         app.UseSwagger();
         app.UseSwaggerUI();
