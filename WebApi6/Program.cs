@@ -9,6 +9,7 @@ using WebApi6.Models;
 
 
 Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose() // 設定最小輸出 Log 等級
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
