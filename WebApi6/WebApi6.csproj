@@ -5,6 +5,7 @@
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IncludeOpenApiAnalyzers>true</IncludeOpenApiAnalyzers>
+        <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
