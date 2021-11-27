@@ -17,14 +17,17 @@ namespace WebApi6.Controllers
     public class DepartmentsController : ControllerBase
     {
         private readonly ILogger<DepartmentsController> _logger;
+        private readonly ILogger _logger2;
         private readonly ContosouniversityContext _context;
         private readonly SmtpSettings _smtpSettings;
 
         public DepartmentsController(ILogger<DepartmentsController> logger,
+            ILoggerFactory loggerFactory,
             ContosouniversityContext context,
             IOptions<SmtpSettings> smtpSettings)
         {
             this._logger = logger;
+            _logger2 = loggerFactory.CreateLogger("Department");
             _context = context;
             _smtpSettings = smtpSettings.Value;
         }
@@ -40,9 +43,18 @@ namespace WebApi6.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<IEnumerable<Department>> GetDepartments()
+        public ActionResult<IEnumerable<Department>> GetDepartments(int id)
         {
-            return Ok(_context.Department.AsNoTracking());
+            _logger.LogTrace("Method {MethodName} Begin", nameof(GetDepartments));
+
+            _logger.LogDebug("Param1={Param1}", id);
+
+            var data = _context.Department.AsNoTracking().ToList();
+            _logger.LogInformation("RecordsCount={RecordsCount}", data.Count());
+
+            _logger.LogTrace("Method {MethodName} End", nameof(GetDepartments));
+
+            return base.Ok(data);
         }
 
         [HttpGet("{id}", Name = nameof(GetDepartmentById))]
