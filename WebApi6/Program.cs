@@ -7,20 +7,15 @@ using Serilog.Events;
 using WebApi6.Helpers;
 using WebApi6.Models;
 
+var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Verbose() // 設定最小輸出 Log 等級
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .WriteTo.File(@"g:\webapi6.log")
+            .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
 
 try
 {
     Log.Information("Starting web host");
-
-    var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
 
