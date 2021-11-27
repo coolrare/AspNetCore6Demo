@@ -33,6 +33,9 @@ namespace WebApi6.Controllers
         [Produces("text/json")]
         public string GetString()
         {
+            _logger.LogInformation("{MethodName}: SMTPHost = {SmtpHost}",
+                nameof(GetString), _smtpSettings.Host);
+
             return "Host: " + _smtpSettings.Host;
         }
 

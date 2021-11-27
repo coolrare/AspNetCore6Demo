@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<JwtHelpers>();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddJsonConsole();
+
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddControllers(options =>
@@ -61,6 +64,10 @@ builder.Services.AddDbContext<ContosouniversityContext>(options =>
 
 
 var app = builder.Build();
+
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
 
 //if (app.Environment.IsDevelopment())
 //{
